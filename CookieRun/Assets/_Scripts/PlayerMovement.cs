@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        if (!rb) rb = gameObject.GetComponent<Rigidbody2D>();
+        if (rb != null) rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D (Collision2D other) 
@@ -20,5 +20,17 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpableCount = 2;
         }    
+    }
+    
+    void Update() 
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            if (jumpableCount > 0)
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+                jumpableCount--;
+            }
     }
 }
