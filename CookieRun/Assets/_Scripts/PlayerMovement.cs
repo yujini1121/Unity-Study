@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int jumpableCount = 2;
     [SerializeField] private float jumpForce = 10f;
 
+    public bool isDie = false;
+
     private Rigidbody2D rb;
 
     private Animator anim;
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Die()
     {
+        isDie = true;
         anim.SetTrigger("Die");
     }
 }
