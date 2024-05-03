@@ -9,9 +9,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    void Start()
+    private Animator anim;
+
+    private void Start()
     {
-        if (rb != null) rb = gameObject.GetComponent<Rigidbody2D>();
+        if (rb == null) rb = gameObject.GetComponent<Rigidbody2D>();
+        anim = gameObject.GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D (Collision2D other) 
@@ -22,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
     
-    void Update() 
+    private void Update() 
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             if (jumpableCount > 0)
             {
                 rb.velocity = Vector2.zero;
@@ -32,5 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
                 jumpableCount--;
             }
+        }
+    }
+
+    private void Die()
+    {
+        anim.SetTrigger("Die");
     }
 }
